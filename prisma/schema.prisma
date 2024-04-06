@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Lecture {
+  id          Int     @id @default(autoincrement())
+  title       String
+  content     String
+  isPublished Boolean
+}
+
+model Document {
+  id          Int     @id @default(autoincrement())
+  title       String  
+  url         String
+  isPublished Boolean
+}
+
+model PracticalWork {
+  id          Int     @id @default(autoincrement())
+  title       String
+  content     String
+  isPublished Boolean
+  variants    Variant[]
+}
+
+model Variant {
+  id      Int            @id @default(autoincrement())
+  work    PracticalWork  @relation(fields: [workId], references: [id])
+  workId  Int
+  content String
+}
