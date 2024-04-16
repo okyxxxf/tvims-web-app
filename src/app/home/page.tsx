@@ -1,4 +1,4 @@
-import { PageLayout } from "@/layouts/PageLayout";
+import { PageLayout } from "@/layouts";
 import { Flex, Text, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import megaBrain from "../../../public/images/image_megabrain.png"
