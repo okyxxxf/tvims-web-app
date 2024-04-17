@@ -8,7 +8,7 @@ type PageLayoutProps = {
 
 export function PageLayout({children}: PageLayoutProps) {
   return (
-    <Box bgColor={colors.backgroundMain} p="50px 100px" h="calc(100vh - 92px)">
+    <Box bgColor={colors.backgroundMain} p="50px 100px" minH="calc(100vh - 92px)">
       <BaseLayout>
         <Box borderRadius="10px" p="30px" bgColor={colors.white}>
           {children}
