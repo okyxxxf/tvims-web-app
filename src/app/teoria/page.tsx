@@ -23,8 +23,8 @@ export default async function Teoria() {
         </Text>
         <Flex columnGap="20px" rowGap="10px" wrap="wrap">
           {lectures.map(({title, content, id}) => (
-            <Link href={`/teoria/${id}`}>
-              <Card key={id} w="250px" h="200px" cursor="pointer">
+            <Link href={`/teoria/${id}`} key={id}>
+              <Card w="250px" h="200px" cursor="pointer">
                 <CardHeader border={`1px solid ${colors.backgroundMain}`} borderTopRadius="10px">
                   <Text as="b">{title}</Text>
                 </CardHeader>
