@@ -22,9 +22,10 @@ export function Header() {
         <Flex>
           {navLinks.map(({name, link}) => {
             return pathname.includes(link) ? 
-              <Link href={link} color={colors.mainBlue} p="8px 16px" borderBottom={`2px solid ${colors.mainBlue}`}>{name}</Link> 
+              <Link key={link} href={link} color={colors.mainBlue} p="8px 16px" borderBottom={`2px solid ${colors.mainBlue}`}>{name}</Link> 
               : 
               <Link 
+              key={link}
               href={link} 
               p="8px 16px" 
               color={colors.black} 
