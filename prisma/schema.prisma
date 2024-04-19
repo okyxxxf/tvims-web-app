@@ -19,7 +19,8 @@ model Lecture {
 
 model Document {
   id          Int     @id @default(autoincrement())
-  title       String  
+  title       String 
+  description String 
   url         String
   isPublished Boolean
 }

@@ -32,3 +32,21 @@ removeOld().then(() => {
     });
   }
 })
+
+p.document.create({
+  data: {
+    title: "Учебная программа",
+    description: "Файл с учебной программой",
+    url: "uchebnaya-programma.docx",
+    isPublished: true,
+  }
+}).then(() => console.log("Doc 1 created"));
+
+p.document.create({
+  data: {
+    title: "Календарно-тематический план",
+    description: "Файл с календарно-тематическим планом",
+    url: "calendar-theme-plan.doc",
+    isPublished: true,
+  }
+}).then(() => console.log("Doc 2 created"));
