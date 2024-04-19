@@ -50,3 +50,37 @@ p.document.create({
     isPublished: true,
   }
 }).then(() => console.log("Doc 2 created"));
+
+p.test.create({
+  data: {
+    title: "Тест по теории вероятности",
+    questions: {
+      create: [
+        {
+          title: "Какая вероятность выпадения орла при броске монеты?",
+          correctAnswerId: 1,
+          answers: {
+            create: [
+              { content: "0.5" },
+              { content: "0.25" },
+              { content: "0.75" },
+              { content: "1" }
+            ]
+          }
+        },
+        {
+          title: "Сколько элементарных исходов имеет бросок двух кубиков?",
+          correctAnswerId: 4,
+          answers: {
+            create: [
+              { content: "6" },
+              { content: "12" },
+              { content: "36" },
+              { content: "24" }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}).then(() => console.log("succes create test"));

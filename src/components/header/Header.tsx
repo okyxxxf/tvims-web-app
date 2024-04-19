@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 export function Header() {
   const navLinks = [
     {name: "Главная", link: "/home"},
-    {name: "Теоритический раздел", link: "/teoria"},
+    {name: "Теоретический раздел", link: "/teoria"},
     {name: "Практический раздел", link: "/practika"},
     {name: "Раздел контроля знаний", link: "/control-znaniy"},
     {name: "Вспомогательный раздел", link: "/documents"},
