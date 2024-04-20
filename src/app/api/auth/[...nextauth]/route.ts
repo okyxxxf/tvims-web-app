@@ -46,7 +46,10 @@ export const authOptions : NextAuthOptions = {
         sessionWithId.user.id = token.id as string;
       }
       return sessionWithId
-    }
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl + "/admin/main"
+    },
   }
 };
 

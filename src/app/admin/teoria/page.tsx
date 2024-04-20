@@ -1,14 +1,20 @@
 "use server";
 
+import { NotAuth } from "@/components";
 import { colors } from "@/components/variables";
 import { PageLayout } from "@/layouts";
-import { Card, CardBody, CardHeader, Flex, Link, Text } from "@chakra-ui/react";
+import { Button, ButtonGroup, Card, CardBody, CardHeader, Flex, Link, Text } from "@chakra-ui/react";
 import { PrismaClient } from "@prisma/client";
-import parse from 'html-react-parser';
+import { getServerSession } from "next-auth";
 
 const p = new PrismaClient();
 
-export default async function Teoria() {
+
+export default async function AdminTeoria() {
+  const session = await getServerSession();
+
+  if (!session) return NotAuth();
+
   const lectures = await p.lecture.findMany({
     where: {
       isPublished: true,
@@ -19,9 +25,7 @@ export default async function Teoria() {
     <PageLayout>
       <Flex direction="column" gap="10px">
         <Text fontSize="2xl" as="b">Теоретический раздел</Text>
-        <Text fontSize="xl" color={colors.darkBlue} mb="20px">
-          В этом разделе вы можете ознакомится с лекциями по учебному предмету “Теория вероятности и математическая статистика”
-        </Text>
+        <Link href="/admin/teoria/new">Добавить новый теоретический материал</Link>
         <Flex columnGap="20px" rowGap="10px" wrap="wrap">
           {lectures.map(({title, id}) => (
             <Link href={`/teoria/${id}`} key={id}>
@@ -29,8 +33,11 @@ export default async function Teoria() {
                 <CardHeader border={`1px solid ${colors.backgroundMain}`} borderTopRadius="10px">
                   <Text as="b">{title}</Text>
                 </CardHeader>
-                <CardBody>
-                  Теоретический материал по теме "{title}"
+                <CardBody >
+                  <ButtonGroup>
+                    <Button>Изменить</Button>
+                    <Button>Удалить</Button>
+                  </ButtonGroup>
                 </CardBody>
               </Card>
             </Link>

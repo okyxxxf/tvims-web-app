@@ -3,6 +3,7 @@ import { Flex, Link, Text } from "@chakra-ui/react";
 import { PrismaClient } from "@prisma/client"
 import { notFound } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
+import parse from 'html-react-parser';
 
 const p = new PrismaClient();
 
@@ -19,7 +20,7 @@ export default async function Lecture({params: { id }}: {params: { id: number}})
   if (!lecture) return notFound();
 
   const {title, content} = lecture;
-
+  
   return (
     <PageLayout>
       <Flex direction="column" gap="30px">
@@ -27,7 +28,7 @@ export default async function Lecture({params: { id }}: {params: { id: number}})
           <IoArrowBack/>
         </Link>
         <Text fontSize="2xl" as="b">{title}</Text>
-        <Text>{content}</Text>
+        {parse(content)}
       </Flex>
     </PageLayout>
   )

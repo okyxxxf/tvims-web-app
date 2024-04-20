@@ -4,12 +4,10 @@ import { AdminSignInForm } from "@/components";
 import { PageLayout } from "@/layouts";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { PrismaClient } from "@prisma/client";
-import { getServerSession } from "next-auth";
 
 const p = new PrismaClient();
 
 export default async function AdminSignIn() {
-  const session = await getServerSession();
   return (
     <Box>
       <PageLayout>

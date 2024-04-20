@@ -16,7 +16,7 @@ export function AdminSignInForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const response = await signIn('credentials', { 
-      redirect: false, 
+      redirect: true, 
       username: login, 
       password: password 
     });
