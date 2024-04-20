@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <BaseLayout>
       <Box p="25px 241px">
-        <Text fontSize="2xl" as="b">© 2024 УЧРЕЖДЕНИЕ ОБРАЗОВАНИЯ "НОВОПОЛЬСКИЙ ГОСУДАРСТВЕННЫЙ АГРАРНО-ЭКОНОМИЧЕСКИЙ КОЛЛЕДЖ"</Text>
+        <Text fontSize="md" as="b">© 2024 УЧРЕЖДЕНИЕ ОБРАЗОВАНИЯ "НОВОПОЛЬСКИЙ ГОСУДАРСТВЕННЫЙ АГРАРНО-ЭКОНОМИЧЕСКИЙ КОЛЛЕДЖ"</Text>
       </Box>
     </BaseLayout>
   )
