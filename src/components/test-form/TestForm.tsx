@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Button, Radio, RadioGroup, Text, VStack } from "@chakra-ui/react"
+import { Box, Button, Input, Radio, RadioGroup, Text, VStack } from "@chakra-ui/react"
 import { useState } from "react";
 
 export type question = {
@@ -19,7 +19,8 @@ type TestFormProps = {
 }
 
 export function TestForm({handleTestSubmit, questions}: TestFormProps) {
-  const [selectedAnswers, setSelectedAnswers] = useState<[{questionId: string, isCorrect: boolean}]>([{questionId: "1", isCorrect: false}]);
+  const [selectedAnswers, setSelectedAnswers] = useState<[{questionId: string, isCorrect: boolean}] | []>([]);
+  const [name, setName] = useState<string>();
 
   const handleChangeAnswer = (id: number, correctId: number, questionId: number) => {
     const isCorrect = id === correctId;
@@ -44,6 +45,8 @@ export function TestForm({handleTestSubmit, questions}: TestFormProps) {
   return (
     <Box>
       <VStack align="start" gap="15px">
+        <Text as="b">Введите фио</Text>
+        <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Иванов Иван Иванович"/>
         {questions.map(({title, answers, correctAnswerId, id}) => (
           <Box key={id}>
             <Text fontSize="xl" as="b">{title}</Text>
@@ -61,8 +64,8 @@ export function TestForm({handleTestSubmit, questions}: TestFormProps) {
             </RadioGroup>
           </Box>
         ))}
+        <Button onClick={() => handleTestSubmit(selectedAnswers, name)}>Завершить тест</Button>
       </VStack>
-      <Button onClick={() => handleTestSubmit(selectedAnswers)}>Завершить тест</Button>
     </Box>
   )
 }

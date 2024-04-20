@@ -22,17 +22,16 @@ export default async function Test({params: { id }}: {params: { id: number}}) {
       }
     }
   });
-  console.log(test)
 
   if (!test) return notFound();
   const {title, questions} = test;
 
-  const handleTestSubmit = async (value: [{questionId: string, isCorrect: boolean}]) => {
+  const handleTestSubmit = async (value: [{questionId: string, isCorrect: boolean}], name: string) => {
     "use server";
     
     const testAttempt = await p.testAttempt.create({
       data: {
-        name: "TestUser",
+        name: name,
         testId: +id,
         correctAnswersCount: value.filter((question) => question.isCorrect).length,
         questionCount: value.length,
