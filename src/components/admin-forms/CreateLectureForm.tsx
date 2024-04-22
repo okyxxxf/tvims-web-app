@@ -2,17 +2,22 @@
 
 import { Button, FormControl, FormLabel, Input, Text } from "@chakra-ui/react"
 import { Editor } from "@tinymce/tinymce-react";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export type CreateLectureFormProps = {
   handleSubmit: Function;
+  titleP?: string;
+  contentP?: string;
 }
 
-export function CreateLectureForm({handleSubmit}: CreateLectureFormProps) {
+export function CreateLectureForm({handleSubmit, titleP, contentP}: CreateLectureFormProps) {
   const [title, setTitle] = useState<string>();
   const [content, setContent] = useState<string>();
 
-  console.log(content);
+  useEffect(() => {
+    if (titleP) setTitle(titleP);
+  }, []);
+
   return (
     <form>
       <FormControl isRequired>
@@ -24,6 +29,7 @@ export function CreateLectureForm({handleSubmit}: CreateLectureFormProps) {
         <Editor
         apiKey='in483scxxvig47c8gl9me6ap0e8dz2l89jcu5keiy7w24n4h'
         value={content}
+        initialValue={contentP}
         onChange={(e) => setContent(e.target.getContent())}
         init={{
           height: 500,
@@ -42,7 +48,7 @@ export function CreateLectureForm({handleSubmit}: CreateLectureFormProps) {
       />
       </FormControl>
       <Button width="full" mt={4} onClick={() => handleSubmit(title, content)}>
-        Создать
+        Сохранить
       </Button>
     </form>
   )

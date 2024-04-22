@@ -3,9 +3,11 @@
 import { NotAuth } from "@/components";
 import { colors } from "@/components/variables";
 import { PageLayout } from "@/layouts";
-import { Button, ButtonGroup, Card, CardBody, CardHeader, Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Card, CardBody, CardHeader, Flex, Link, Text } from "@chakra-ui/react";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
+import { RemoveLectionButton } from "./RemoveLecture";
+import { revalidatePath } from "next/cache";
 
 const p = new PrismaClient();
 
@@ -21,6 +23,16 @@ export default async function AdminTeoria() {
     },
   });
 
+  const deleteLecture = async (id: number) => {
+    "use server";
+    await p.lecture.delete({
+      where: {
+        id: id
+      }
+    });
+    revalidatePath("/admin/teoria", "page");
+  }
+
   return (
     <PageLayout>
       <Flex direction="column" gap="10px">
@@ -28,19 +40,23 @@ export default async function AdminTeoria() {
         <Link href="/admin/teoria/new">Добавить новый теоретический материал</Link>
         <Flex columnGap="20px" rowGap="10px" wrap="wrap">
           {lectures.map(({title, id}) => (
-            <Link href={`/teoria/${id}`} key={id}>
+              <div key={id}>
               <Card w="250px" h="200px" cursor="pointer">
                 <CardHeader border={`1px solid ${colors.backgroundMain}`} borderTopRadius="10px">
-                  <Text as="b">{title}</Text>
+                  <Link href={`/teoria/${id}`} >
+                    <Text as="b">{title}</Text>
+                  </Link>
                 </CardHeader>
                 <CardBody >
                   <ButtonGroup>
-                    <Button>Изменить</Button>
-                    <Button>Удалить</Button>
+                    <Link href={`/admin/teoria/${id}`}>
+                      <Button>Изменить</Button>
+                    </Link>
+                    <RemoveLectionButton handler={deleteLecture} id={id}/>
                   </ButtonGroup>
                 </CardBody>
               </Card>
-            </Link>
+              </div>
           ))}
         </Flex>
       </Flex>
