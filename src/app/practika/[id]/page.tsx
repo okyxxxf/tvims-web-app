@@ -3,6 +3,7 @@ import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPane
 import { PrismaClient } from "@prisma/client"
 import { notFound } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
+import parse from 'html-react-parser';
 
 const p = new PrismaClient();
 
@@ -26,7 +27,7 @@ export default async function Work({params: { id }}: {params: { id: number}}) {
           <IoArrowBack/>
         </Link>
         <Text fontSize="2xl" as="b">{title}</Text>
-        <Text>{content}</Text>
+        {parse(content)}
         <Accordion allowMultiple>
           {variants.map(({content}, i) => (
             <AccordionItem key={i}>
@@ -39,7 +40,7 @@ export default async function Work({params: { id }}: {params: { id: number}}) {
                 </AccordionButton>
               </h2>
                 <AccordionPanel pb={4}>
-                  {content}
+                  {parse(content)}
                 </AccordionPanel>
                 </AccordionItem>
           ))}

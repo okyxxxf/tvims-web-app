@@ -22,14 +22,14 @@ export default async function Practika() {
         В этом разделе вы можете ознакомится с практическими заданиями по учебному предмету “Теория вероятности и математическая статистика” 
         </Text>
         <Flex columnGap="20px" rowGap="10px" wrap="wrap">
-          {practicheskie.map(({title, content, id}) => (
+          {practicheskie.map(({title, id}) => (
             <Link href={`/practika/${id}`} key={id}>
               <Card w="250px" h="200px" cursor="pointer">
                 <CardHeader border={`1px solid ${colors.backgroundMain}`} borderTopRadius="10px">
                   <Text as="b">{title}</Text>
                 </CardHeader>
                 <CardBody >
-                  <Text noOfLines={3}>{content}</Text>
+                  <Text noOfLines={3}>Практическое занятие по теме {title}</Text>
                 </CardBody>
               </Card>
             </Link>
